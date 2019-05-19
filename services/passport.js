@@ -5,7 +5,7 @@ const keys = require('../config/keys')
 
 const User = mongoose.model('users')
 
-//to set up cookie for user
+//to set up cookies for user
 passport.serializeUser((user, done) => {
   done(null, user.id)
 })

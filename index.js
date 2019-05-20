@@ -3,10 +3,9 @@ const mongoose = require('mongoose')
 const cookieSession = require('cookie-session')
 const passport = require('passport')
 const keys = require('./config/keys')
-const Model = require('./models/User')
+require('./models/User')
 require('./services/passport')
 
-Model()
 mongoose.connect(keys.mongoURI)
 
 const app = express()

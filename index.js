@@ -2,11 +2,11 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cookieSession = require('cookie-session')
 const passport = require('passport')
-const keys = require('./config/prod')
+const keys = require('./config/keys')
 require('./models/User')
 require('./services/passport')
 
-mongoose.connect(prod.mongoURI)
+mongoose.connect(keys.mongoURI)
 
 const app = express()
 

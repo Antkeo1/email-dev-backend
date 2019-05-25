@@ -25,25 +25,20 @@ passport.use(
       callbackURL: '/auth/google/callback',
       proxy: true
     },
-    (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
       // to find accounts where googleId matches profile id
-      User.findOne({ googleId: profile.id })
-        .then(existingUser => {
-          if (existingUser) {
-            // we already have a user with that profile id,
-            // no need to create a new one on mongoose
-            done(null, existingUser)
-          } else {
-            // we dont have a user with that profile id
-            // we need to make a new user
-            // to create new user
-            new User({ googleId: profile.id }).save()
-              .then(user => done(null, user))
-          }
-        })
+      const existingUser = await User.findOne({ googleId: profile.id })
+      if (existingUser) {
+        // we already have a user with that profile id,
+        // no need to create a new one on mongoose
+        return done(null, existingUser)
+      }
 
-
-
+        // we dont have a user with that profile id
+        // we need to make a new user
+        // to create new user
+        const user = await new User({ googleId: profile.id }).save()
+          done(null, user)
     }
   )
 )

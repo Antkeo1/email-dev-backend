@@ -10,9 +10,7 @@ class Header extends React.Component {
         return <li><a href="/auth/google">Login With Google</a></li>
 
       default:
-        return (
-          <li><a>Logout</a></li>
-        )
+        return <li><a>Logout</a></li>
     }
   }
 

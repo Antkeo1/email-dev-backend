@@ -5,6 +5,7 @@ const passport = require('passport')
 const bodyParser = require('body-parser')
 const keys = require('./config/keys')
 require('./models/user')
+require('./models/survey')
 require('./services/passport')
 
 mongoose.connect(keys.mongoURI)
@@ -25,6 +26,7 @@ app.use(passport.session());
 //routes
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app)
 
 // if in production
 if (process.env.NODE_ENV === 'production') {
@@ -33,10 +35,8 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   })
-}
+};
 
 app.listen(process.env.PORT || 5000, function(){
     console.log('Your node js server is running');
 });
-// const PORT = process.env.PORT || 5000
-// app.listen(PORT)

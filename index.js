@@ -8,7 +8,8 @@ require('./models/user')
 require('./models/survey')
 require('./services/passport')
 
-mongoose.connect(keys.mongoURI)
+mongoose.Promise = global.Promise
+mongoose.connect(keys.mongoURI,{useNewUrlParser: true })
 
 const app = express()
 
